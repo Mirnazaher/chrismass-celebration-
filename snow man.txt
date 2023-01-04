@@ -1,0 +1,96 @@
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+#include <stdlib.h>
+#include <windows.h>
+#include <math.h>
+
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+
+#include <stdlib.h>
+#include <windows.h>
+#include <math.h>
+void display();
+void reshape(int w,int h);
+void timer(int);
+
+
+//------------------------------  reshapeFunc  ---------------------------------
+float mx;
+float mz,ux,uz,i,c;
+float step=0;
+float x;
+void init(){
+    glClearColor(0.0,0,0.3,0);
+}
+
+void reshapeFunc (int w, int h)
+{
+    glViewport(0,0,(GLsizei)w,(GLsizei)h);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective (40.0, (GLdouble)w / (GLdouble)h, 0.5, 20.0);
+    glMatrixMode(GL_MODELVIEW);
+
+}
+void keyboard(unsigned char Key,int x,int y)
+    {
+    if(Key=='w'){mz-=0.01;} if(Key=='s'){mz+=0.01;}//forward and back
+    if(Key=='a'){mx-=0.01;} if(Key=='d'){mx+=0.01;}//left and right
+  if(Key=='8'){uz-=0.5;} if(Key=='2'){uz+=0.5;}//forward and back
+    if(Key=='4'){ux-=0.5;} if(Key=='6'){ux+=0.5;}//left and right
+
+
+
+    glutPostRedisplay();
+    }
+
+int zRotated=0;
+int xRotated=0;
+ void snowman (){
+            glColor3f (1, 1, 1); // Blue ball displaced to right.
+    glPushMatrix ();
+       glTranslatef    (4.5+mx, -2.5, 1.0+mz);
+       glRotatef       (60.0, 1,0,0);
+
+       glutSolidSphere(1.2,10, 30);
+    glPopMatrix ();
+
+    /////////////////////////////////////
+
+    glPushMatrix ();
+       glTranslatef    (4.5+mx, -0.5, 1.0+mz);
+       glRotatef       (60.0, 1,0,0);
+
+       glutSolidSphere(1.1,10, 30);
+    glPopMatrix ();
+//////////////////////////////////////////////////
+       glPushMatrix ();
+       glTranslatef    (4.5+mx, 1.0, 1.0+mz);
+       glRotatef       (60.0, 1,0,0);
+
+       glutSolidSphere(0.5,10, 30);
+    glPopMatrix ();
+    /////////////////////////
+     glColor3f(1,1,0.6);
+     glPushMatrix ();
+       glTranslatef    (4.5+mx,1, 1.0+mz);
+       glRotatef       (60.0, 1,0,0);
+       glRotatef       (-45, 1,0,0);
+       glutSolidCone(0.3,0.9, 50,50);
+    glPopMatrix ();
+glColor3f(0,0,0);
+glPushMatrix ();
+       glTranslatef    (4.6+mx, 1.2, 1.6+mz);
+       glRotatef       (60.0, 1,0,0);
+       glutSolidSphere(0.08,8,12);
+    glPopMatrix ();
+    glPushMatrix ();
+       glTranslatef    (4.1+mx, 1.2, 1.6+mz);
+       glRotatef       (60.0, 1,0,0);
+       glutSolidSphere(0.08,8,12);
+    glPopMatrix ();}
+
+
